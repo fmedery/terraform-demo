@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 ## AWS account where the route 53 DNS zone is hosted
-# provider "azurerm" {}
+provider "azurerm" {}
 
 # resource "azurerm_resource_group" "resource_group" {
 #   name = "terraform"
@@ -14,6 +14,21 @@ provider "aws" {
 
 variable "resource_group_name" {
   default = "terraform-demo"
+}
+
+## AWS account where the route 53 DNS zone is hosted
+provider "azurerm" {}
+
+variable "rg" {
+  default = "fmedery-poc"
+}
+
+# variable "nbr" {}
+
+data "azurerm_subnet" "subnet" {
+  name                 = "default"
+  virtual_network_name = "fmedery-poc-vnet"
+  resource_group_name  = "${var.rg}"
 }
 
 variable "nbr" {}
