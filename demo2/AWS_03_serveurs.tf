@@ -1,38 +1,3 @@
-## Load balancer
-
-resource "aws_elb" "load_balancer" {
-  name            = "${var.resource_group_name}"
-  security_groups = ["${aws_security_group.security_group.id}"]
-
-  subnets = [
-    "${aws_subnet.ca-central-1a.id}",
-    "${aws_subnet.ca-central-1b.id}",
-  ]
-
-  listener {
-    instance_port     = 80
-    instance_protocol = "http"
-    lb_port           = 80
-    lb_protocol       = "http"
-  }
-
-  health_check {
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    timeout             = 3
-    target              = "HTTP:80/"
-    interval            = 30
-  }
-
-  cross_zone_load_balancing = true
-
-  instances = ["${aws_instance.serveurs.*.id}"]
-
-  tags {
-    resource_group_name = "${var.resource_group_name}"
-  }
-}
-
 ## RECUPERATION DE ID de AMI ubuntu latest
 
 data "aws_ami" "ubuntu" {
@@ -74,7 +39,7 @@ resource "aws_instance" "serveurs" {
 
   connection {
     type = "ssh"
-    user = "${var.ssh_user}"
+    user = "ubuntu"
   }
 
   # Copies the myapp.conf file to /etc/myapp.conf

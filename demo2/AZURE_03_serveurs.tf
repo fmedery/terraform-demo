@@ -20,12 +20,13 @@ resource "azurerm_storage_account" "mystorageaccount" {
 }
 
 resource "azurerm_virtual_machine" "myterraformvm" {
-  count                 = "${var.nbr}"
-  name                  = "terraform-demo${count.index +1}"
-  location              = "eastus"
-  resource_group_name   = "${var.rg}"
-  network_interface_ids = ["${element(azurerm_network_interface.network_interface.*.id, count.index)}"]
-  vm_size               = "Standard_DS1_v2"
+  count                         = "${var.nbr}"
+  name                          = "terraform-demo${count.index +1}"
+  location                      = "eastus"
+  resource_group_name           = "${var.rg}"
+  network_interface_ids         = ["${element(azurerm_network_interface.network_interface.*.id, count.index)}"]
+  vm_size                       = "Standard_DS1_v2"
+  delete_os_disk_on_termination = true
 
   storage_os_disk {
     name              = "myOsDisk${count.index +1}"
