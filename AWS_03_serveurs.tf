@@ -60,7 +60,7 @@ resource "aws_instance" "serveurs" {
   associate_public_ip_address = true
   ami                         = "${data.aws_ami.ubuntu.id}"
   instance_type               = "t2.micro"
-  key_name                    = "terraform-demo"
+  key_name                    = "${var.ssh_key_name}"
 
   root_block_device {
     volume_type           = "gp2"
@@ -74,7 +74,7 @@ resource "aws_instance" "serveurs" {
 
   connection {
     type = "ssh"
-    user = "ubuntu"
+    user = "${var.ssh_user}"
   }
 
   # Copies the myapp.conf file to /etc/myapp.conf
