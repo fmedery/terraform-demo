@@ -51,7 +51,7 @@ resource "aws_instance" "serveurs" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/aws.sh",
-      "/tmp/aws.sh",
+      "/tmp/aws.sh demo2",
     ]
   }
 }

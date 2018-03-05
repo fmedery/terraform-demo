@@ -11,4 +11,4 @@ sudo systemctl enable nginx
 sudo systemctl restart nginx
 
 
-echo "Amazon AWS $(hostname)" | sudo tee /var/www/html/index.html
+echo "Amazon AWS $(hostname) $1" | sudo tee /var/www/html/index.html
