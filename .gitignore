@@ -1,3 +1,4 @@
+azure_login
 .terraform
 *.tfstate
 *.tfstate.backup
