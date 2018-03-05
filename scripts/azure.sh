@@ -3,7 +3,7 @@ set -x
 #set -e
 
 sleep 10
-sudo apt-get update
+sudo apt-get -qq update
 
 sudo apt-get -y install nginx
 

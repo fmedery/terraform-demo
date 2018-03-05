@@ -45,8 +45,6 @@ resource "azurerm_virtual_machine" "myterraformvm" {
   os_profile {
     computer_name  = "myvm"
     admin_username = "azureuser"
-
-    # admin_username = "${var.ssh_user}"
   }
 
   os_profile_linux_config {
@@ -62,6 +60,28 @@ resource "azurerm_virtual_machine" "myterraformvm" {
     enabled     = "true"
     storage_uri = "${azurerm_storage_account.mystorageaccount.primary_blob_endpoint}"
   }
+
+  tags {
+    environment = "terraform-demo"
+  }
+}
+
+resource "azurerm_virtual_machine_extension" "nginx" {
+  count                = "${var.nbr}"
+  name                 = "terraform-demo${count.index +1}"
+  location             = "eastus"
+  resource_group_name  = "${var.rg}"
+  virtual_machine_name = "${element(azurerm_virtual_machine.myterraformvm.*.name, count.index )}"
+  publisher            = "Microsoft.OSTCExtensions"
+  type                 = "CustomScriptForLinux"
+  type_handler_version = "1.2"
+
+  settings = <<SETTINGS
+    {
+        "fileUris": ["https://github.com/fmedery/terraform-demo/blob/master/scripts/azure.sh"],
+        "commandToExecute": "./azure.sh demo2"
+      }
+SETTINGS
 
   tags {
     environment = "terraform-demo"
