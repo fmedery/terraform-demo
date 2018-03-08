@@ -23,7 +23,7 @@ resource "azurerm_public_ip" "public_ip" {
   name                         = "terraform-demo1"
   location                     = "canadaeast"
   resource_group_name          = "${var.rg}"
-  public_ip_address_allocation = "dynamic"
+  public_ip_address_allocation = "static"
 
   tags {
     environment = "terraform-demo"
@@ -83,27 +83,6 @@ resource "azurerm_network_security_group" "security_group" {
   }
 }
 
-# resource "random_id" "randomId" {
-#   keepers = {
-#     # Generate a new ID only when a new resource group is defined
-#     resource_group = "${var.rg}"
-#   }
-#
-#   byte_length = 8
-# }
-
-# resource "azurerm_storage_account" "mystorageaccount" {
-#   name                     = "diag${random_id.randomId.hex}"
-#   resource_group_name      = "${var.rg}"
-#   location                 = "canadaeast"
-#   account_replication_type = "LRS"
-#   account_tier             = "Standard"
-#
-#   tags {
-#     environment = "terraform-demo"
-#   }
-# }
-
 resource "azurerm_virtual_machine" "myterraformvm" {
   name                          = "terraform-demo1"
   location                      = "canadaeast"
@@ -140,11 +119,6 @@ resource "azurerm_virtual_machine" "myterraformvm" {
     }
   }
 
-  # boot_diagnostics {
-  #   enabled     = "true"
-  #   storage_uri = "${azurerm_storage_account.mystorageaccount.primary_blob_endpoint}"
-  # }
-
   tags {
     environment = "terraform-demo"
   }
@@ -162,7 +136,7 @@ resource "azurerm_virtual_machine_extension" "nginx" {
   settings = <<SETTINGS
     {
       "fileUris": ["https://raw.githubusercontent.com/fmedery/terraform-demo/master/scripts/azure.sh"],
-      "commandToExecute": "/bin/bash ./azure.sh"
+      "commandToExecute": "/bin/bash ./azure.sh demo1"
     }
 SETTINGS
 

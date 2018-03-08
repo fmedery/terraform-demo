@@ -12,6 +12,4 @@ resource "aws_route53_record" "www" {
   ttl     = "60"
 
   records = ["${azurerm_public_ip.public_ip.ip_address}"]
-
-  # depends_on = ["${azurerm_public_ip.public_ip}"]
 }
