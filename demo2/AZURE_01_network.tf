@@ -9,7 +9,7 @@ resource "azurerm_public_ip" "public_ip" {
   name                         = "terraform-demo${count.index + 1}"
   location                     = "eastus"
   resource_group_name          = "${var.rg}"
-  public_ip_address_allocation = "dynamic"
+  public_ip_address_allocation = "static"
 
   tags {
     environment = "terraform-demo"

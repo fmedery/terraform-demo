@@ -38,8 +38,11 @@ resource "aws_instance" "serveurs" {
   }
 
   connection {
-    type = "ssh"
-    user = "ubuntu"
+    bastion_host        = "${var.aws_bastion_host}"
+    bastion_port        = "${var.aws_bastion_port}"
+    bastion_private_key = "${file("g")}"
+    type                = "ssh"
+    user                = "ubuntu"
   }
 
   # Copies the myapp.conf file to /etc/myapp.conf

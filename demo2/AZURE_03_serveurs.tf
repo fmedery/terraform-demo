@@ -78,9 +78,9 @@ resource "azurerm_virtual_machine_extension" "nginx" {
 
   settings = <<SETTINGS
     {
-        "fileUris": ["https://github.com/fmedery/terraform-demo/blob/master/scripts/azure.sh"],
-        "commandToExecute": "./azure.sh demo2"
-      }
+      "fileUris": ["https://raw.githubusercontent.com/fmedery/terraform-demo/master/scripts/azure.sh"],
+      "commandToExecute": "/bin/bash ./azure.sh demo2"
+    }
 SETTINGS
 
   tags {

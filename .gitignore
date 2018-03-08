@@ -4,4 +4,5 @@ azure_login
 *.tfstate.backup
 *.lock.info
 *.pem
+*.pub
 *.tfvars
