@@ -21,7 +21,7 @@ resource "azurerm_subnet" "subnet1" {
 resource "azurerm_public_ip" "public_ip" {
   count                        = "${var.nbr}"
   name                         = "terraform-demo2-${count.index + 1}"
-  location                     = "eastus"
+  location                     = "canadaeast"
   resource_group_name          = "${var.rg}"
   public_ip_address_allocation = "static"
 
@@ -33,7 +33,7 @@ resource "azurerm_public_ip" "public_ip" {
 resource "azurerm_network_interface" "network_interface" {
   count               = "${var.nbr}"
   name                = "terraform-demo2-${count.index +1}"
-  location            = "eastus"
+  location            = "canadaeast"
   resource_group_name = "${var.rg}"
 
   ip_configuration {

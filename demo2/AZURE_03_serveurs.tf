@@ -1,7 +1,7 @@
 resource "azurerm_virtual_machine" "myterraformvm" {
   count                         = "${var.nbr}"
   name                          = "terraform-demo2-${count.index +1}"
-  location                      = "eastus"
+  location                      = "canadaeast"
   resource_group_name           = "${var.rg}"
   network_interface_ids         = ["${element(azurerm_network_interface.network_interface.*.id, count.index)}"]
   vm_size                       = "Standard_DS1_v2"
@@ -43,7 +43,7 @@ resource "azurerm_virtual_machine" "myterraformvm" {
 resource "azurerm_virtual_machine_extension" "nginx" {
   count                = "${var.nbr}"
   name                 = "terraform-demo${count.index +1}"
-  location             = "eastus"
+  location             = "canadaeast"
   resource_group_name  = "${var.rg}"
   virtual_machine_name = "${element(azurerm_virtual_machine.myterraformvm.*.name, count.index )}"
   publisher            = "Microsoft.OSTCExtensions"

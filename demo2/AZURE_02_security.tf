@@ -1,6 +1,6 @@
 resource "azurerm_network_security_group" "security_group" {
   name                = "terraform-demo2"
-  location            = "eastus"
+  location            = "canadaeast"
   resource_group_name = "${var.rg}"
 
   security_rule {
