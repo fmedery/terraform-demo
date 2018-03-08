@@ -27,13 +27,13 @@ resource "aws_security_group" "security_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # permet ping
-  ingress {
-    from_port   = 8
-    to_port     = 0
-    protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  # # permet ping
+  # ingress {
+  #   from_port   = 8
+  #   to_port     = 0
+  #   protocol    = "icmp"
+  #   cidr_blocks = ["0.0.0.0/0"]
+  # }
 
   ## permet aux serveurs de se connecter vers l'exterieur
   egress {
@@ -42,7 +42,6 @@ resource "aws_security_group" "security_group" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   tags {
     resource_group_name = "${var.resource_group_name}"
   }

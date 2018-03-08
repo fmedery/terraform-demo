@@ -1,24 +1,7 @@
-# provider "aws" {
-#   profile = "${var.aws_profile}"
-#   region  = "${var.aws_region}"
-# }
-#
-# provider "azurerm" {}
-#
-# variable "rg" {}
-# variable "aws_profile" {}
-# variable "aws_region" {}
-# variable "nbr" {}
-# variable "ssh_public_key" {}
-# variable "ssh_key_name" {}
-# variable "resource_group_name" {}
-# variable "dns_zone" {}
-#
-#
-# provider "aws" {
-#   profile = "${var.aws_profile}"
-#   region  = "${var.aws_region}"
-# }
+provider "aws" {
+  profile = "${var.aws_profile}"
+  region  = "${var.aws_region}"
+}
 
 provider "azurerm" {
   client_id       = "${var.azure_client_id}"
@@ -33,7 +16,12 @@ variable "ssh_public_key" {}
 variable "dns_zone" {}
 variable "rg" {}
 variable "nbr" {}
-
+variable "resource_group_name" {}
+variable "ssh_key_name" {}
+variable "aws_bastion_host" {}
+variable "aws_bastion_port" {}
+variable "aws_bastion_user" {}
+variable "aws_bastion_private_key" {}
 variable "azure_client_id" {}
 variable "azure_client_secret" {}
 variable "azure_tenant_id" {}

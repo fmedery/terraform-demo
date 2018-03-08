@@ -7,23 +7,12 @@ resource "aws_vpc" "vpc" {
   }
 }
 
-## CREATION des RESEAUX -> AZ
+## CREATION d'un SOUS RESEAU
 
 resource "aws_subnet" "ca-central-1a" {
   vpc_id                  = "${aws_vpc.vpc.id}"
   cidr_block              = "10.0.1.0/24"
   availability_zone       = "ca-central-1a"
-  map_public_ip_on_launch = true
-
-  tags {
-    resource_group_name = "${var.resource_group_name}"
-  }
-}
-
-resource "aws_subnet" "ca-central-1b" {
-  vpc_id                  = "${aws_vpc.vpc.id}"
-  cidr_block              = "10.0.2.0/24"
-  availability_zone       = "ca-central-1b"
   map_public_ip_on_launch = true
 
   tags {

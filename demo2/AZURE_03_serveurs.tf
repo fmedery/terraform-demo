@@ -1,27 +1,6 @@
-resource "random_id" "randomId" {
-  keepers = {
-    # Generate a new ID only when a new resource group is defined
-    resource_group = "${var.rg}"
-  }
-
-  byte_length = 8
-}
-
-resource "azurerm_storage_account" "mystorageaccount" {
-  name                     = "diag${random_id.randomId.hex}"
-  resource_group_name      = "${var.rg}"
-  location                 = "eastus"
-  account_replication_type = "LRS"
-  account_tier             = "Standard"
-
-  tags {
-    environment = "terraform-demo"
-  }
-}
-
 resource "azurerm_virtual_machine" "myterraformvm" {
   count                         = "${var.nbr}"
-  name                          = "terraform-demo${count.index +1}"
+  name                          = "terraform-demo2-${count.index +1}"
   location                      = "eastus"
   resource_group_name           = "${var.rg}"
   network_interface_ids         = ["${element(azurerm_network_interface.network_interface.*.id, count.index)}"]
@@ -29,7 +8,7 @@ resource "azurerm_virtual_machine" "myterraformvm" {
   delete_os_disk_on_termination = true
 
   storage_os_disk {
-    name              = "myOsDisk${count.index +1}"
+    name              = "myOsDisk2-${count.index +1}"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Premium_LRS"
@@ -54,11 +33,6 @@ resource "azurerm_virtual_machine" "myterraformvm" {
       path     = "/home/azureuser/.ssh/authorized_keys"
       key_data = "${var.ssh_public_key}"
     }
-  }
-
-  boot_diagnostics {
-    enabled     = "true"
-    storage_uri = "${azurerm_storage_account.mystorageaccount.primary_blob_endpoint}"
   }
 
   tags {

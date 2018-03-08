@@ -40,7 +40,8 @@ resource "aws_instance" "serveurs" {
   connection {
     bastion_host        = "${var.aws_bastion_host}"
     bastion_port        = "${var.aws_bastion_port}"
-    bastion_private_key = "${file("g")}"
+    bastion_user        = "${var.aws_bastion_user}"
+    bastion_private_key = "${file(var.aws_bastion_private_key)}"
     type                = "ssh"
     user                = "ubuntu"
   }

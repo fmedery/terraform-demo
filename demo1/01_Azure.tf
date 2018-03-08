@@ -50,7 +50,7 @@ resource "azurerm_network_interface" "network_interface" {
 }
 
 resource "azurerm_network_security_group" "security_group" {
-  name                = "terraform-demo"
+  name                = "terraform-demo1"
   location            = "canadaeast"
   resource_group_name = "${var.rg}"
 

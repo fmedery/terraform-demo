@@ -1,5 +1,5 @@
 resource "azurerm_network_security_group" "security_group" {
-  name                = "terraform-demo"
+  name                = "terraform-demo2"
   location            = "eastus"
   resource_group_name = "${var.rg}"
 
