@@ -1,3 +1,4 @@
+# création d'un groupe de sécurité qui permet SSH et HTTP
 resource "azurerm_network_security_group" "security_group" {
   name                = "terraform-demo2"
   location            = "canadaeast"

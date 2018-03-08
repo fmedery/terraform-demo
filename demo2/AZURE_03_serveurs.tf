@@ -1,3 +1,4 @@
+# Creation de la machine virtuelle
 resource "azurerm_virtual_machine" "myterraformvm" {
   count                         = "${var.nbr}"
   name                          = "terraform-demo2-${count.index +1}"
@@ -7,6 +8,7 @@ resource "azurerm_virtual_machine" "myterraformvm" {
   vm_size                       = "Standard_DS1_v2"
   delete_os_disk_on_termination = true
 
+  # creation de disque
   storage_os_disk {
     name              = "myOsDisk2-${count.index +1}"
     caching           = "ReadWrite"
@@ -14,6 +16,7 @@ resource "azurerm_virtual_machine" "myterraformvm" {
     managed_disk_type = "Premium_LRS"
   }
 
+  # choix de l'OS
   storage_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
@@ -29,6 +32,7 @@ resource "azurerm_virtual_machine" "myterraformvm" {
   os_profile_linux_config {
     disable_password_authentication = true
 
+    # depoyment d'une clee SSH
     ssh_keys {
       path     = "/home/azureuser/.ssh/authorized_keys"
       key_data = "${var.ssh_public_key}"
@@ -40,6 +44,7 @@ resource "azurerm_virtual_machine" "myterraformvm" {
   }
 }
 
+# utilisation d'un script pour installer nginx et le index.html
 resource "azurerm_virtual_machine_extension" "nginx" {
   count                = "${var.nbr}"
   name                 = "terraform-demo${count.index +1}"
