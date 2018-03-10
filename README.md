@@ -20,9 +20,11 @@ terraform destroy
 ## demo2
 
 * add all ssh keys to ssh-add
-```cd demo2
+```sh
+cd demo2
 terraform init
 terraform plan
 terraform apply
 
-terraform destroy```
+terraform destroy
+```
