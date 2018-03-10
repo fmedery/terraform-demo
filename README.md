@@ -8,12 +8,14 @@
 ## demo1
 
 * add all ssh keys to ssh-add
-```cd demo1
+```sh
+cd demo1
 terraform init
 terraform plan
 terraform apply
 
-terraform destroy```
+terraform destroy
+```
 
 ## demo2
 
