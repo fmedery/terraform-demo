@@ -1,4 +1,4 @@
-azure_login
+*.azcli
 .terraform
 *.tfstate
 *.tfstate.backup
